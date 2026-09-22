@@ -12,7 +12,7 @@ if [ "${APP_ENV}" != "production" ] || [ "${RUN_MIGRATIONS:-true}" = "true" ]; t
     echo "Running database migrations..."
     php artisan migrate --force --no-interaction
     echo "Seeding admin user..."
-    php artisan db:seed --class=Database\\\\Seeders\\\\AdminUserSeeder --force --no-interaction
+    php artisan db:seed --class='Database\Seeders\AdminUserSeeder' --force --no-interaction
 fi
 
 if [ "${APP_KEY}" ]; then

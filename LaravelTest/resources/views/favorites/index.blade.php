@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Meine Favoriten – Minecraft Server')
+@section('title', 'My Favorites – Minecraft Servers')
 
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Meine <span class="text-emerald-400">Favoriten</span></h1>
-        <p class="mt-2 text-slate-400">Alle Server, die du als Favorit gespeichert hast.</p>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">My <span class="text-emerald-400">Favorites</span></h1>
+        <p class="mt-2 text-slate-400">All the servers you have saved as favorites.</p>
 
         <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($servers as $server)
@@ -27,10 +27,10 @@
                 </a>
             @empty
                 <div class="sm:col-span-2 lg:col-span-3 rounded-2xl bg-white/5 border border-white/10 p-12 text-center">
-                    <p class="text-lg font-semibold">Noch keine Favoriten</p>
-                    <p class="mt-2 text-sm text-slate-500">Entdecke Server und speichere sie mit einem Klick.</p>
+                    <p class="text-lg font-semibold">No favorites yet</p>
+                    <p class="mt-2 text-sm text-slate-500">Discover servers and save them with a single click.</p>
                     <a href="{{ route('servers.index') }}" class="mt-6 inline-block rounded-lg bg-emerald-500 hover:bg-emerald-400 px-6 py-3 text-sm font-semibold text-white transition">
-                        Server entdecken
+                        Discover servers
                     </a>
                 </div>
             @endforelse

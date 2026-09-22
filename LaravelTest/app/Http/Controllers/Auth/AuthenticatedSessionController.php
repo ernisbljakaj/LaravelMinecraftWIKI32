@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Diese Zugangsdaten stimmen nicht mit unseren Aufzeichnungen überein.',
+            'email' => 'These credentials do not match our records.',
         ])->onlyInput('email');
     }
 

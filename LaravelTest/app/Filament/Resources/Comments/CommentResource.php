@@ -21,13 +21,13 @@ class CommentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
-    protected static ?string $navigationLabel = 'Kommentare';
+    protected static ?string $navigationLabel = 'Comments';
 
-    protected static ?string $modelLabel = 'Kommentar';
+    protected static ?string $modelLabel = 'Comment';
 
-    protected static ?string $pluralModelLabel = 'Kommentare';
+    protected static ?string $pluralModelLabel = 'Comments';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Inhalte';
+    protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     public static function form(Schema $schema): Schema
     {

@@ -21,13 +21,13 @@ class WikiPageResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
-    protected static ?string $navigationLabel = 'Wiki-Artikel';
+    protected static ?string $navigationLabel = 'Wiki Articles';
 
-    protected static ?string $modelLabel = 'Wiki-Artikel';
+    protected static ?string $modelLabel = 'Wiki Article';
 
-    protected static ?string $pluralModelLabel = 'Wiki-Artikel';
+    protected static ?string $pluralModelLabel = 'Wiki Articles';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Inhalte';
+    protected static string|UnitEnum|null $navigationGroup = 'Content';
 
     public static function form(Schema $schema): Schema
     {

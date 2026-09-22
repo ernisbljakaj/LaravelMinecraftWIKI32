@@ -18,23 +18,23 @@ class UserForm
                     ->maxLength(255),
 
                 TextInput::make('email')
-                    ->label('E-Mail')
+                    ->label('Email')
                     ->email()
                     ->required()
                     ->maxLength(255)
                     ->unique('users', 'email', ignoreRecord: true),
 
                 Select::make('role')
-                    ->label('Rolle')
+                    ->label('Role')
                     ->options([
-                        'user' => 'Benutzer',
+                        'user' => 'User',
                         'admin' => 'Administrator',
                     ])
                     ->default('user')
                     ->required(),
 
                 TextInput::make('password')
-                    ->label('Passwort')
+                    ->label('Password')
                     ->password()
                     ->revealable()
                     ->minLength(8)
@@ -43,7 +43,7 @@ class UserForm
                     ->required(fn (string $operation) => $operation === 'create'),
 
                 TextInput::make('passwordConfirmation')
-                    ->label('Passwort bestätigen')
+                    ->label('Confirm password')
                     ->password()
                     ->revealable()
                     ->minLength(8)

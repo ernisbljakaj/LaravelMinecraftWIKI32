@@ -35,7 +35,7 @@ class CommentController extends Controller
             'approved' => true,
         ]);
 
-        return redirect()->back()->with('status', 'Kommentar hinzugefügt.');
+        return redirect()->back()->with('status', 'Comment added.');
     }
 
     public function destroy(Request $request, Comment $comment): RedirectResponse
@@ -44,6 +44,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect()->back()->with('status', 'Kommentar gelöscht.');
+        return redirect()->back()->with('status', 'Comment deleted.');
     }
 }

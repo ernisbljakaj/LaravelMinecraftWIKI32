@@ -44,7 +44,7 @@ class ServerController extends Controller
         }
 
         return redirect()->route('servers.index')
-            ->with('status', 'Dein Server wurde eingereicht und wartet auf Freigabe durch einen Admin.');
+            ->with('status', 'Your server has been submitted and is waiting for approval by an admin.');
     }
 
     public function index()

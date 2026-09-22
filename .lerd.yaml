@@ -1,0 +1,6 @@
+domains:
+  - laravelminecraftwiki
+node_version: "22"
+secured: true
+proxy:
+  port: 3000

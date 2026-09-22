@@ -27,12 +27,12 @@ class FavoriteController extends Controller
 
         if ($user->favoritedServers()->where('servers.id', $server->id)->exists()) {
             $user->favoritedServers()->detach($server->id);
-            $status = 'aus deinen Favoriten entfernt';
+            $status = 'removed from your favorites';
         } else {
             $user->favoritedServers()->attach($server->id);
-            $status = 'zu deinen Favoriten hinzugefügt';
+            $status = 'added to your favorites';
         }
 
-        return redirect()->back()->with('status', "„{$server->name}“ wurde $status.");
+        return redirect()->back()->with('status', "{$server->name} was $status.");
     }
 }

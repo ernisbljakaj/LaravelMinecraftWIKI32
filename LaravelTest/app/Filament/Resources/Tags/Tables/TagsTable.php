@@ -25,7 +25,7 @@ class TagsTable
                     ->label('Slug')
                     ->searchable(),
                 TextColumn::make('servers_count')
-                    ->label('Server')
+                    ->label('Servers')
                     ->counts('servers')
                     ->sortable(),
             ])

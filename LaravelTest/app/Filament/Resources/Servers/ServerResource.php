@@ -27,7 +27,7 @@ class ServerResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Server';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Verzeichnis';
+    protected static string|UnitEnum|null $navigationGroup = 'Directory';
 
     public static function form(Schema $schema): Schema
     {

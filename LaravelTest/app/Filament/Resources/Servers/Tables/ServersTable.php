@@ -31,25 +31,25 @@ class ServersTable
                     ->badge()
                     ->color('gray'),
                 BadgeColumn::make('mode')
-                    ->label('Modus')
+                    ->label('Mode')
                     ->color('success'),
                 TagsColumn::make('tags.name')
                     ->label('Tags')
                     ->limit(3),
                 BooleanColumn::make('approved')
-                    ->label('Freigegeben'),
+                    ->label('Approved'),
                 BooleanColumn::make('featured')
                     ->label('Featured'),
                 TextColumn::make('created_at')
-                    ->label('Erstellt')
+                    ->label('Created')
                     ->date('d.m.Y')
                     ->sortable(),
             ])
             ->filters([
                 TernaryFilter::make('approved')
-                    ->label('Freigabe'),
+                    ->label('Approval'),
                 SelectFilter::make('mode')
-                    ->label('Modus')
+                    ->label('Mode')
                     ->options([
                         'Survival' => 'Survival',
                         'Creative' => 'Creative',

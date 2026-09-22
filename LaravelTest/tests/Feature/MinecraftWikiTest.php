@@ -18,13 +18,13 @@ class MinecraftWikiTest extends TestCase
     public function test_homepage_lists_only_approved_servers(): void
     {
         $approved = Server::factory()->approved()->create(['name' => 'Craftland']);
-        $unapproved = Server::factory()->unapproved()->create(['name' => 'Geheimer Server']);
+        $unapproved = Server::factory()->unapproved()->create(['name' => 'Secret Server']);
 
         $response = $this->get('/');
 
         $response->assertOk()
             ->assertSee('Craftland')
-            ->assertDontSee('Geheimer Server');
+            ->assertDontSee('Secret Server');
 
         $this->assertDatabaseHas('servers', ['id' => $unapproved->id, 'approved' => false]);
     }
@@ -57,30 +57,30 @@ class MinecraftWikiTest extends TestCase
     public function test_wiki_index_is_filterable_by_category(): void
     {
         $redstone = WikiPage::factory()->approved()->create(['title' => 'Redstone Guide', 'category' => 'Redstone']);
-        $farm = WikiPage::factory()->approved()->create(['title' => 'Farmen Guide', 'category' => 'Farmen']);
+        $farm = WikiPage::factory()->approved()->create(['title' => 'Farming Guide', 'category' => 'Farming']);
 
         $response = $this->get(route('wiki.index', ['category' => 'Redstone']));
 
         $response->assertOk()
             ->assertSee('Redstone Guide')
-            ->assertDontSee('Farmen Guide');
+            ->assertDontSee('Farming Guide');
     }
 
     public function test_wiki_detail_shows_content_and_comments(): void
     {
-        $page = WikiPage::factory()->approved()->create(['title' => 'Eisenfarm bauen']);
+        $page = WikiPage::factory()->approved()->create(['title' => 'Build an iron farm']);
         $user = User::factory()->create();
         Comment::create([
             'user_id' => $user->id,
             'commentable_type' => WikiPage::class,
             'commentable_id' => $page->id,
-            'body' => 'Toller Guide!',
+            'body' => 'Great guide!',
         ]);
 
         $this->get(route('wiki.show', $page))
             ->assertOk()
-            ->assertSee('Eisenfarm bauen')
-            ->assertSee('Toller Guide!');
+            ->assertSee('Build an iron farm')
+            ->assertSee('Great guide!');
     }
 
     public function test_unapproved_wiki_page_is_not_accessible(): void
@@ -157,14 +157,14 @@ class MinecraftWikiTest extends TestCase
         $this->actingAs($user)->post(route('comments.store'), [
             'commentable_type' => Server::class,
             'commentable_id' => $server->id,
-            'body' => 'Dieser Server ist super!',
+            'body' => 'This server is amazing!',
         ])->assertRedirect();
 
         $this->assertDatabaseHas('comments', [
             'user_id' => $user->id,
             'commentable_type' => Server::class,
             'commentable_id' => $server->id,
-            'body' => 'Dieser Server ist super!',
+            'body' => 'This server is amazing!',
         ]);
     }
 
@@ -175,7 +175,7 @@ class MinecraftWikiTest extends TestCase
         $this->post(route('comments.store'), [
             'commentable_type' => Server::class,
             'commentable_id' => $server->id,
-            'body' => 'Hallo',
+            'body' => 'Hello',
         ])->assertRedirect(route('login'));
     }
 
@@ -189,7 +189,7 @@ class MinecraftWikiTest extends TestCase
             'user_id' => $owner->id,
             'commentable_type' => Server::class,
             'commentable_id' => $server->id,
-            'body' => 'Mein Kommentar',
+            'body' => 'My comment',
         ]);
 
         $this->actingAs($other)->delete(route('comments.destroy', $comment))->assertForbidden();
@@ -205,16 +205,16 @@ class MinecraftWikiTest extends TestCase
         $tag = Tag::create(['name' => 'Survival', 'slug' => 'survival']);
 
         $response = $this->actingAs($user)->post(route('servers.store'), [
-            'name' => 'Mein Server',
-            'ip' => 'play.meinserver.de',
+            'name' => 'My Server',
+            'ip' => 'play.myserver.com',
             'version' => '1.21',
             'mode' => 'Survival',
-            'description' => 'Ein toller Server.',
+            'description' => 'A great server.',
             'tags' => [$tag->id],
         ]);
 
         $this->assertDatabaseHas('servers', [
-            'name' => 'Mein Server',
+            'name' => 'My Server',
             'approved' => false,
             'user_id' => $user->id,
         ]);

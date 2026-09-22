@@ -13,13 +13,13 @@ class CommentForm
         return $schema
             ->components([
                 Textarea::make('body')
-                    ->label('Kommentar')
+                    ->label('Comment')
                     ->required()
                     ->rows(4)
                     ->columnSpanFull(),
 
                 Toggle::make('approved')
-                    ->label('Freigegeben')
+                    ->label('Approved')
                     ->default(true),
             ]);
     }

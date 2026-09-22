@@ -18,34 +18,34 @@ class CommentsTable
         return $table
             ->columns([
                 TextColumn::make('commentable_type')
-                    ->label('Für')
+                    ->label('For')
                     ->formatStateUsing(fn ($state) => class_basename($state))
                     ->badge(),
                 TextColumn::make('commentable_id')
                     ->label('ID')
                     ->sortable(),
                 TextColumn::make('user.name')
-                    ->label('Benutzer')
+                    ->label('User')
                     ->searchable(),
                 TextColumn::make('body')
-                    ->label('Kommentar')
+                    ->label('Comment')
                     ->limit(50)
                     ->searchable(),
                 BooleanColumn::make('approved')
-                    ->label('Freigegeben'),
+                    ->label('Approved'),
                 TextColumn::make('created_at')
-                    ->label('Erstellt')
+                    ->label('Created')
                     ->date('d.m.Y H:i')
                     ->sortable(),
             ])
             ->filters([
                 TernaryFilter::make('approved')
-                    ->label('Freigabe'),
+                    ->label('Approval'),
                 SelectFilter::make('commentable_type')
-                    ->label('Bereich')
+                    ->label('Section')
                     ->options([
                         'App\Models\Server' => 'Server',
-                        'App\Models\WikiPage' => 'Wiki-Artikel',
+                        'App\Models\WikiPage' => 'Wiki Article',
                     ]),
             ])
             ->recordActions([

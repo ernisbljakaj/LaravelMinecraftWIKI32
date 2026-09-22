@@ -26,7 +26,7 @@ class TagForm
                     ->maxLength(255),
 
                 ColorPicker::make('color')
-                    ->label('Farbe')
+                    ->label('Color')
                     ->default('#6366f1'),
             ]);
     }

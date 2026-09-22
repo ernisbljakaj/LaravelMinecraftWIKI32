@@ -18,35 +18,35 @@ class WikiPagesTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Titel')
+                    ->label('Title')
                     ->searchable()
                     ->sortable()
                     ->limit(40),
                 TextColumn::make('category')
-                    ->label('Kategorie')
+                    ->label('Category')
                     ->badge()
                     ->color('success')
                     ->searchable()
                     ->sortable(),
                 BooleanColumn::make('approved')
-                    ->label('Freigegeben'),
+                    ->label('Approved'),
                 TextColumn::make('user.name')
-                    ->label('Autor')
+                    ->label('Author')
                     ->placeholder('—'),
                 TextColumn::make('created_at')
-                    ->label('Erstellt')
+                    ->label('Created')
                     ->date('d.m.Y')
                     ->sortable(),
             ])
             ->filters([
                 TernaryFilter::make('approved')
-                    ->label('Freigabe'),
+                    ->label('Approval'),
                 SelectFilter::make('category')
-                    ->label('Kategorie')
+                    ->label('Category')
                     ->options([
                         'Redstone' => 'Redstone',
-                        'Farmen' => 'Farmen',
-                        'Bauen' => 'Bauen',
+                        'Farming' => 'Farming',
+                        'Building' => 'Building',
                         'Enchanting' => 'Enchanting',
                         'Biome' => 'Biome',
                         'Mobs' => 'Mobs',

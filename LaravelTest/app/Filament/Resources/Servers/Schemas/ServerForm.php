@@ -21,18 +21,18 @@ class ServerForm
                     ->maxLength(255),
 
                 TextInput::make('ip')
-                    ->label('Server-Adresse')
+                    ->label('Server address')
                     ->required()
-                    ->placeholder('play.beispiel.ch')
+                    ->placeholder('play.example.com')
                     ->maxLength(255),
 
                 TextInput::make('version')
-                    ->label('Minecraft-Version')
+                    ->label('Minecraft version')
                     ->default('1.21')
                     ->maxLength(50),
 
                 Select::make('mode')
-                    ->label('Spielmodus')
+                    ->label('Game mode')
                     ->options([
                         'Survival' => 'Survival',
                         'Creative' => 'Creative',
@@ -46,7 +46,7 @@ class ServerForm
                     ->required(),
 
                 Textarea::make('description')
-                    ->label('Beschreibung')
+                    ->label('Description')
                     ->rows(4)
                     ->columnSpanFull(),
 
@@ -56,8 +56,8 @@ class ServerForm
                     ->columnSpanFull(),
 
                 Toggle::make('approved')
-                    ->label('Freigegeben')
-                    ->helperText('Server wurde von einem Admin geprüft.')
+                    ->label('Approved')
+                    ->helperText('The server has been reviewed by an admin.')
                     ->default(false),
 
                 Toggle::make('featured')

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Server einreichen – Minecraft Wiki & Server')
+@section('title', 'Submit a server – Minecraft Wiki & Server')
 
 @section('content')
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-3xl font-bold tracking-tight">Server <span class="text-emerald-400">einreichen</span></h1>
-        <p class="mt-2 text-slate-400">Nach der Einreichung prüft ein Admin deinen Server, bevor er in der Liste erscheint.</p>
+        <h1 class="text-3xl font-bold tracking-tight">Submit a <span class="text-emerald-400">server</span></h1>
+        <p class="mt-2 text-slate-400">After submission, an admin will review your server before it appears in the list.</p>
 
         @if ($errors->any())
             <div class="mt-6 rounded-lg bg-red-500/10 border border-red-500/30 p-4 text-sm text-red-300">
@@ -20,21 +20,21 @@
 
             <div>
                 <label for="name" class="block text-sm font-medium text-slate-300">Name *</label>
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="z. B. Craftland">
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="e.g. Craftland">
             </div>
 
             <div>
-                <label for="ip" class="block text-sm font-medium text-slate-300">Server-Adresse (IP) *</label>
-                <input id="ip" type="text" name="ip" value="{{ old('ip') }}" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="play.beispiel.ch">
+                <label for="ip" class="block text-sm font-medium text-slate-300">Server address (IP) *</label>
+                <input id="ip" type="text" name="ip" value="{{ old('ip') }}" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="play.example.com">
             </div>
 
             <div class="grid sm:grid-cols-2 gap-6">
                 <div>
-                    <label for="version" class="block text-sm font-medium text-slate-300">Minecraft-Version *</label>
+                    <label for="version" class="block text-sm font-medium text-slate-300">Minecraft version *</label>
                     <input id="version" type="text" name="version" value="{{ old('version', '1.21') }}" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="1.21">
                 </div>
                 <div>
-                    <label for="mode" class="block text-sm font-medium text-slate-300">Spielmodus *</label>
+                    <label for="mode" class="block text-sm font-medium text-slate-300">Game mode *</label>
                     <select id="mode" name="mode" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50">
                         <option value="Survival" @selected(old('mode') === 'Survival')>Survival</option>
                         <option value="Creative" @selected(old('mode') === 'Creative')>Creative</option>
@@ -48,8 +48,8 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium text-slate-300">Beschreibung *</label>
-                <textarea id="description" name="description" rows="5" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="Was macht deinen Server besonders? Welche Spieler sucht ihr?">{{ old('description') }}</textarea>
+                <label for="description" class="block text-sm font-medium text-slate-300">Description *</label>
+                <textarea id="description" name="description" rows="5" required class="mt-1.5 w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50" placeholder="What makes your server special? What kind of players are you looking for?">{{ old('description') }}</textarea>
             </div>
 
             <div>
@@ -65,7 +65,7 @@
             </div>
 
             <button type="submit" class="w-full rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 py-3 text-sm font-semibold text-white transition">
-                Server einreichen
+                Submit server
             </button>
         </form>
     </div>

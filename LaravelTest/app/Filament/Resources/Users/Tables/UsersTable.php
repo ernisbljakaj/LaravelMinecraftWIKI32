@@ -21,30 +21,30 @@ class UsersTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('email')
-                    ->label('E-Mail')
+                    ->label('Email')
                     ->searchable(),
                 BadgeColumn::make('role')
-                    ->label('Rolle')
-                    ->formatStateUsing(fn ($state) => $state === 'admin' ? 'Administrator' : 'Benutzer')
+                    ->label('Role')
+                    ->formatStateUsing(fn ($state) => $state === 'admin' ? 'Administrator' : 'User')
                     ->color(fn ($state) => $state === 'admin' ? 'warning' : 'gray'),
                 TextColumn::make('servers_count')
-                    ->label('Server')
+                    ->label('Servers')
                     ->counts('servers')
                     ->sortable(),
                 TextColumn::make('comments_count')
-                    ->label('Kommentare')
+                    ->label('Comments')
                     ->counts('comments')
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Registriert')
+                    ->label('Registered')
                     ->date('d.m.Y')
                     ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('role')
-                    ->label('Rolle')
+                    ->label('Role')
                     ->options([
-                        'user' => 'Benutzer',
+                        'user' => 'User',
                         'admin' => 'Administrator',
                     ]),
             ])

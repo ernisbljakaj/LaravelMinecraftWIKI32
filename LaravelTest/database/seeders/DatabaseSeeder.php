@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'ip' => 'play.craftland.de',
                 'version' => '1.21.4',
                 'mode' => 'Survival',
-                'description' => 'Craftland ist ein deutschsprachiger Survival-Server mit Towny, freundlicher Community und wöchentlichen Events. Land wird über Claims geschützt und der Server läuft seit über 10 Jahren stabil mit einer großen Map.',
+                'description' => 'Craftland is an English-speaking survival server with Towny, a friendly community and weekly events. Land is protected via claims and the server has been running stable for over 10 years with a large map.',
                 'user_id' => $admin->id,
             ],
             [
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'ip' => 'mc.hypixel.net',
                 'version' => '1.21',
                 'mode' => 'Minigames',
-                'description' => 'Der weltweit größte Minigames-Server mit über 10.000 gleichzeitigen Spielern. Klassiker wie SkyBlock, BedWars, SkyWars und Duels, dazu ein eigenes Rangsystem und kosmetische Gegenstände.',
+                'description' => 'The world\'s largest minigames server with over 10,000 concurrent players. Classics such as SkyBlock, BedWars, SkyWars and Duels, plus its own ranking system and cosmetic items.',
                 'user_id' => $demoUser->id,
             ],
             [
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
                 'ip' => 'skyblockkingdom.net',
                 'version' => '1.20.4',
                 'mode' => 'Skyblock',
-                'description' => 'Ein Skyblock-Server mit eigener Insel im Slimefun-Style, automatisierten Farmen, Marktplatz und Islands-Co-op. Perfekt für alle, die gerne effiziente Farmen bauen.',
+                'description' => 'A skyblock server with your own island in the Slimefun style, automated farms, a marketplace and island co-op. Perfect for everyone who enjoys building efficient farms.',
                 'user_id' => $demoUser->id,
             ],
             [
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'ip' => 'pvp.goldserver.eu',
                 'version' => '1.21',
                 'mode' => 'PvP',
-                'description' => 'PvP-Server mit Anarchy-Aspekten: Keine Regionen, kein Schutz, nur Überleben. Gearbeute, Kits und monatliche Ranglisten-Kämpfe mit echten Preisen.',
+                'description' => 'PvP server with anarchy aspects: no regions, no protection, just survival. Gear drops, kits and monthly ranked fights with real prizes.',
                 'user_id' => $admin->id,
             ],
             [
@@ -75,15 +75,15 @@ class DatabaseSeeder extends Seeder
                 'ip' => 'play.redtech.de',
                 'version' => '1.20.1',
                 'mode' => 'Creative',
-                'description' => 'Kreativ-Server mit Plot-Welt für Redstone-Bauten und technische Kunstwerke. Wöchentliche Bauwettbewerbe mit Shoutout im Discord und bis zu 10.000 Blöcke pro Plot.',
+                'description' => 'Creative server with a plot world for redstone builds and technical works of art. Weekly building contests with a shoutout in the Discord and up to 10,000 blocks per plot.',
                 'user_id' => $demoUser->id,
             ],
             [
-                'name' => 'WeltNetz',
-                'ip' => 'mc.weltnetz.org',
+                'name' => 'WorldNet',
+                'ip' => 'mc.worldnet.org',
                 'version' => '1.21.4',
                 'mode' => 'Vanilla',
-                'description' => 'Reines Vanilla-Gameplay mit freundlicher, kleiner Community. Whitelist-Verfahren, 1.21.4, Hard-Mode und eine komplett unmodifizierte Welt für Authentisch-Genießer.',
+                'description' => 'Pure vanilla gameplay with a friendly, small community. Whitelist process, 1.21.4, hard mode and a completely unmodified world for authenticity fans.',
                 'user_id' => $admin->id,
             ],
         ];
@@ -120,36 +120,44 @@ class DatabaseSeeder extends Seeder
             };
         }
 
+        WikiPage::whereIn('title', [
+            'Einfache automatische Farm mit Redstone',
+            'Die perfekte Eisenfarm bauen',
+            'Moderne Minecraft-Häuser: Grundlagen',
+            'Verzaubern wie ein Profi',
+            'Villager-Trading: Der beste Handel mit Zombie-Heilung',
+        ])->delete();
+
         $wikiTemplates = [
             [
                 'category' => 'Redstone',
-                'title' => 'Einfache automatische Farm mit Redstone',
-                'excerpt' => 'Lerne, wie du mit einem Observer, einem Kolben und ein paar Verstärkern eine simple AFK-Farm baust.',
-                'content' => "Ein Redstone-Komparator erkennt, wenn sich der Zustand eines Blocks ändert. Das ist die Grundlage der meisten automatischen Farmen.\n\nSo baust du eine einfache Schildkröten-fressende Fischerei-Farm:\n1. Baue einen Observer und richte ihn auf Wasser.\n2. Platziere einen Kolben darunter, der einen Sandblock bewegt.\n3. Verbinde den Observer-Ausgang mit Redstone zu einem Notfall-Sperrsystem.\n\nWichtig ist, dass der Kreislauf sternförmig bleibt: Ein Taktgeber mit zwei Verstärkern sorgt dafür, dass der Kolben im richtigen Moment ausfährt.",
+                'title' => 'Simple automatic redstone farm',
+                'excerpt' => 'Learn how to build a basic AFK farm using an observer, a piston and a few repeaters.',
+                'content' => "A redstone comparator detects whenever the state of a block changes. That is the foundation of most automatic farms.\n\nHere is how to build a simple fish farm that feeds you automatically:\n1. Place an observer and aim it at some water.\n2. Put a piston underneath it that moves a sand block.\n3. Connect the observer output with redstone to a locking system.\n\nIt is important that the circuit stays loop-shaped: a clock made from two repeaters makes sure the piston extends at exactly the right moment.",
             ],
             [
-                'category' => 'Farmen',
-                'title' => 'Die perfekte Eisenfarm bauen',
-                'excerpt' => 'Eisenfarmen liefern dir ohne Mining endlose Eisenbarren – so baust du eine zuverlässige Variante.',
-                'content' => "Eisen-Golems spawnen, wenn genug Dorfbewohner in der Nähe sind und ein Zombie sie bedroht. Eine funktionierende Eisenfarm nutzt genau diesen Mechanismus.\n\nBenötigt werden:\n- Mindestens 3 Dorfbewohner\n- Eine Zombie-Zelle am Kampfplatz\n- Einen Sammeltrichter mit Truhe unter dem Tötungsbereich\n\nDer Spawn-Radius muss überwunden werden: Platziere die Dorfbewohner mindestens 5 Blöcke über dem Tötungskanal und versperre die Sicht so, dass der Golem direkt in den Trichter fällt.",
+                'category' => 'Farming',
+                'title' => 'Building the perfect iron farm',
+                'excerpt' => 'Iron farms give you endless iron ingots without mining – here is how to build a reliable version.',
+                'content' => "Iron golems spawn when enough villagers are nearby and a zombie threatens them. A working iron farm uses exactly this mechanic.\n\nYou will need:\n- At least 3 villagers\n- A zombie cell at the fighting area\n- A hopper with a chest below the kill zone\n\nThe spawn radius has to be dealt with: place the villagers at least 5 blocks above the killing channel and block their line of sight so the golem falls straight into the hopper.",
             ],
             [
-                'category' => 'Bauen',
-                'title' => 'Moderne Minecraft-Häuser: Grundlagen',
-                'excerpt' => 'Shapes, Materialmix und Licht setzen – Tipps für Häuser, die nicht aussehen wie Kisten.',
-                'content' => "Ein modernes Haus beginnt mit einem guten Grundriss. Vermeide perfekte Quadrate und plane stattdessen einen L-förmigen oder versetzten Bau.\n\nMaterial-Tipps:\n- Kombiniere Beton mit Holz und Glas in Kalttönen\n- Setze Lichtquellen wie Hellstein unsichtbar unter Treppen\n- Nutze Abstellgleise und Kästen, um Säulen aufzulockern\n\nDachformen: Flachdach mit Friesband oder Pultdach. Vergiss Einzäunungen, Balkone und ein Atrium nicht – gute Proportionen machen den Unterschied.",
+                'category' => 'Building',
+                'title' => 'Modern Minecraft houses: the basics',
+                'excerpt' => 'Shapes, materials and lighting – tips for houses that don\'t look like boxes.',
+                'content' => "A modern house starts with a good floor plan. Avoid perfect squares and instead plan an L-shaped or staggered build.\n\nMaterial tips:\n- Combine concrete with wood and glass in cool tones\n- Place light sources like glowstone invisibly under stairs\n- Use slabs and chests to break up columns\n\nRoof shapes: a flat roof with a fascia band or a shed roof. Don't forget fences, balconies and an atrium – good proportions make the difference.",
             ],
             [
                 'category' => 'Enchanting',
-                'title' => 'Verzaubern wie ein Profi',
-                'excerpt' => 'Maximale Verzauberungen erreichen: von der optimalen Bibliothek bis zur besten Verzauberungs-Stufe.',
-                'content' => "Verzauberungstische nutzen umliegende Bücherregale: Für Stufe 30 brauchst du 15 Regale, die in einer Reihe um den Tisch platziert werden müssen.\n\nTipps für die maximale Ausbeute:\n- Verzaubere immer mit Stufe 30 und Lapislazuli\n- Repariere Werkzeuge vorher – der Geheimnis-Faktor steigt\n- Nutze Bücher mit Kommoden-Fleisch, um Verzauberungen zu übertragen\n\nDenke daran: Das Glück aller Dinge wird per RNG bestimmt – kombiniere Verzauberungen strategisch auf einem Dorfschmied-Amboss.",
+                'title' => 'Enchant like a pro',
+                'excerpt' => 'Reach maximum enchantments: from the optimal library to the best enchantment level.',
+                'content' => "Enchanting tables use the bookshelves around them: for level 30 you need 15 shelves, placed in a row around the table.\n\nTips for the maximum yield:\n- Always enchant at level 30 with lapis lazuli\n- Repair your tools first – the secret factor increases\n- Use enchanted books to transfer enchantments\n\nRemember: the luck of everything is decided by RNG – combine enchantments strategically on a village smith anvil.",
             ],
             [
                 'category' => 'Mobs',
-                'title' => 'Villager-Trading: Der beste Handel mit Zombie-Heilung',
-                'excerpt' => 'Heile Zombie-Villager für lächerliche Rabatte und baue so eine perfekte Handelshalle.',
-                'content' => "Geheilte Zombie-Villager geben massive Rabatte – und erneut geheilte kumulieren. So profitierst du beim Dorfbewohner-Handel.\n\nSchritte:\n1. Finde einen Zombie-Villager in einem Keller oder einer Wüste\n2. Sperre ihn mit einer Karre, damit die Sonne ihn nicht verbrennt\n3. Wirf ihm einen Schleimbeutel mit Verzauberung zu\n4. Warte auf die Heilung und baue darum eine Handelshalle\n\nDer Effekt bleibt dauerhaft – perfekt für reine Survival-Server wie unseren Vanilla-Server WeltNetz.",
+                'title' => 'Villager trading: the best deal with zombie curing',
+                'excerpt' => 'Cure zombie villagers for ridiculous discounts and build a perfect trading hall around them.',
+                'content' => "Cured zombie villagers give huge discounts – and re-cured ones keep stacking. Here is how to profit from villager trading.\n\nSteps:\n1. Find a zombie villager in a basement or a desert\n2. Trap it with a cart so the sun doesn't burn it\n3. Throw a splash potion of weakness and feed it a golden apple\n4. Wait for the cure and build a trading hall around it\n\nThe effect stays permanent – perfect for pure survival servers like our vanilla server WorldNet.",
             ],
         ];
 

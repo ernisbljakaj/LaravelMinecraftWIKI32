@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title', 'Minecraft Wiki & Server-Verzeichnis')</title>
+        <title>@yield('title', 'Minecraft Wiki & Server Directory')</title>
 
         @fonts
 
@@ -28,8 +28,8 @@
                         <a href="{{ route('servers.index') }}" class="px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('servers.*') || request()->routeIs('home') ? 'bg-white/10 text-emerald-400' : 'text-slate-300 hover:bg-white/5' }}">Server</a>
                         <a href="{{ route('wiki.index') }}" class="px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('wiki.*') ? 'bg-white/10 text-emerald-400' : 'text-slate-300 hover:bg-white/5' }}">Wiki</a>
                         @auth
-                            <a href="{{ route('favorites.index') }}" class="px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('favorites.*') ? 'bg-white/10 text-emerald-400' : 'text-slate-300 hover:bg-white/5' }}">Favoriten</a>
-                            <a href="{{ route('servers.create') }}" class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm font-medium hover:bg-emerald-500/20 transition">+ Server einreichen</a>
+                            <a href="{{ route('favorites.index') }}" class="px-4 py-2 rounded-lg text-sm font-medium {{ request()->routeIs('favorites.*') ? 'bg-white/10 text-emerald-400' : 'text-slate-300 hover:bg-white/5' }}">Favorites</a>
+                            <a href="{{ route('servers.create') }}" class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm font-medium hover:bg-emerald-500/20 transition">+ Submit a server</a>
                         @endauth
                     </div>
 
@@ -46,11 +46,11 @@
                             @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5">Abmelden</button>
+                                <button type="submit" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5">Log out</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5">Anmelden</a>
-                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition">Registrieren</a>
+                            <a href="{{ route('login') }}" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5">Log in</a>
+                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold shadow-lg shadow-emerald-500/25 transition">Sign up</a>
                         @endauth
                     </div>
                 </div>
@@ -71,7 +71,7 @@
 
         <footer class="border-t border-white/5 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-slate-500">Minecraft Wiki & Server-Verzeichnis – nicht von Mojang/Microsoft verbunden</p>
+                <p class="text-sm text-slate-500">Minecraft Wiki & Server Directory – not affiliated with Mojang/Microsoft</p>
                 <div class="flex items-center gap-6 text-sm text-slate-400">
                     <a href="{{ route('servers.index') }}" class="hover:text-emerald-400 transition">Server</a>
                     <a href="{{ route('wiki.index') }}" class="hover:text-emerald-400 transition">Wiki</a>

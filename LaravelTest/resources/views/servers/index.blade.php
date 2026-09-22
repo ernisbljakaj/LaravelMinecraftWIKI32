@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Server-Verzeichnis – Minecraft Wiki & Server')
+@section('title', 'Server Directory – Minecraft Wiki & Server')
 
 @section('content')
     <section class="relative overflow-hidden">
@@ -8,29 +8,29 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
             <div class="max-w-3xl">
                 <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">
-                    Entdecke die besten <span class="text-emerald-400">Minecraft-Server</span>
+                    Discover the best <span class="text-emerald-400">Minecraft servers</span>
                 </h1>
                 <p class="mt-4 text-lg text-slate-400">
-                    Vergleiche Server nach IP, Version und Spielmodus. Speichere deine Lieblingsserver und
-                    tauche ein in Guides aus unserem Wiki.
+                    Compare servers by IP, version and game mode. Save your favorite servers and
+                    dive into guides from our wiki.
                 </p>
                 <form method="GET" action="{{ route('servers.index') }}" class="mt-8 flex flex-col sm:flex-row gap-3">
                     <input
                         type="text"
                         name="q"
                         value="{{ request('q') }}"
-                        placeholder="Server, IP oder Modus suchen…"
+                        placeholder="Search servers, IPs or game modes…"
                         class="flex-1 rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50"
                     >
                     <button type="submit" class="rounded-lg bg-emerald-500 hover:bg-emerald-400 px-6 py-3 text-sm font-semibold text-white transition">
-                        Suchen
+                        Search
                     </button>
                 </form>
             </div>
 
             @if ($featured->isNotEmpty())
                 <div class="mt-12">
-                    <h2 class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Vorgestellte Server</h2>
+                    <h2 class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Featured servers</h2>
                     <div class="mt-4 grid gap-6 md:grid-cols-3">
                         @foreach ($featured as $server)
                             <a href="{{ route('servers.show', $server) }}" class="group rounded-2xl bg-white/5 border border-white/10 p-6 hover:border-emerald-500/40 transition">
@@ -58,10 +58,10 @@
             <aside class="lg:col-span-1">
                 <div class="lg:sticky lg:top-24 space-y-6">
                     <div>
-                        <h3 class="text-sm font-semibold uppercase tracking-widest text-slate-500">Tags filtern</h3>
+                        <h3 class="text-sm font-semibold uppercase tracking-widest text-slate-500">Filter by tag</h3>
                         <div class="mt-4 flex lg:flex-col flex-wrap gap-2">
                             <a href="{{ route('servers.index', array_merge(request()->except('tag'), ['tag' => null])) }}" class="px-3 py-2 rounded-lg text-sm {{ ! request('tag') ? 'bg-emerald-500 text-white font-medium' : 'bg-white/5 text-slate-300 hover:bg-white/10' }} transition">
-                                Alle
+                                All
                             </a>
                             @foreach ($tags as $tag)
                                 <a href="{{ route('servers.index', array_merge(request()->except('tag'), ['tag' => $tag->slug])) }}" class="px-3 py-2 rounded-lg text-sm flex items-center justify-between {{ request('tag') === $tag->slug ? 'bg-emerald-500 text-white font-medium' : 'bg-white/5 text-slate-300 hover:bg-white/10' }} transition">
@@ -77,7 +77,7 @@
             <div class="lg:col-span-3">
                 @if (request('q'))
                     <p class="mb-6 text-sm text-slate-400">
-                        Ergebnisse für <strong class="text-slate-200">"{{ request('q') }}"</strong>
+                        Results for <strong class="text-slate-200">"{{ request('q') }}"</strong>
                     </p>
                 @endif
 
@@ -113,11 +113,11 @@
                         </a>
 @empty
                     <div class="sm:col-span-2 rounded-2xl bg-white/5 border border-white/10 p-12 text-center">
-                        <p class="text-slate-400">Keine Server gefunden.</p>
-                        <p class="mt-2 text-sm text-slate-500">Ändere deinen Suchbegriff oder Filter.</p>
+                        <p class="text-slate-400">No servers found.</p>
+                        <p class="mt-2 text-sm text-slate-500">Change your search term or filters.</p>
                         @auth
                             <a href="{{ route('servers.create') }}" class="mt-6 inline-block rounded-lg bg-emerald-500 hover:bg-emerald-400 px-6 py-3 text-sm font-semibold text-white transition">
-                                Eigenen Server einreichen
+                                Submit your own server
                             </a>
                         @endauth
                     </div>

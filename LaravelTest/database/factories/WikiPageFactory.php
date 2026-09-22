@@ -14,7 +14,7 @@ class WikiPageFactory extends Factory
 {
     public function definition(): array
     {
-        $categories = ['Redstone', 'Farmen', 'Bauen', 'Enchanting', 'Biome', 'Mobs', 'General'];
+        $categories = ['Redstone', 'Farming', 'Building', 'Enchanting', 'Biome', 'Mobs', 'General'];
 
         return [
             'title' => fake()->unique()->sentence(4),

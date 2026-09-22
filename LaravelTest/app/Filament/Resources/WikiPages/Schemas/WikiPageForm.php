@@ -16,7 +16,7 @@ class WikiPageForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->label('Titel')
+                    ->label('Title')
                     ->required()
                     ->maxLength(255)
                     ->live()
@@ -28,11 +28,11 @@ class WikiPageForm
                     ->maxLength(255),
 
                 Select::make('category')
-                    ->label('Kategorie')
+                    ->label('Category')
                     ->options([
                         'Redstone' => 'Redstone',
-                        'Farmen' => 'Farmen',
-                        'Bauen' => 'Bauen',
+                        'Farming' => 'Farming',
+                        'Building' => 'Building',
                         'Enchanting' => 'Enchanting',
                         'Biome' => 'Biome',
                         'Mobs' => 'Mobs',
@@ -42,22 +42,22 @@ class WikiPageForm
                     ->required(),
 
                 RichEditor::make('content')
-                    ->label('Inhalt')
+                    ->label('Content')
                     ->required()
                     ->columnSpanFull(),
 
                 TextInput::make('excerpt')
-                    ->label('Kurzbeschreibung')
+                    ->label('Excerpt')
                     ->maxLength(300)
                     ->columnSpanFull(),
 
                 TextInput::make('image')
-                    ->label('Bild-URL')
+                    ->label('Image URL')
                     ->placeholder('https://…')
                     ->columnSpanFull(),
 
                 Toggle::make('approved')
-                    ->label('Freigegeben')
+                    ->label('Approved')
                     ->default(false),
             ])
             ->columns(2);

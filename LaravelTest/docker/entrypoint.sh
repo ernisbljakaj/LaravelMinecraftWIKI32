@@ -15,7 +15,11 @@ fi
 
 if [ "${APP_KEY}" ]; then
     echo "Starting php-fpm..."
-    exec php-fpm
+    php-fpm -D
+
+    echo "Starting nginx on port ${PORT}..."
+    envsubst '${PORT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
+    exec nginx -g 'daemon off;'
 else
     echo "!! APP_KEY is missing. Generate one: php artisan key:generate" >&2
     exit 1

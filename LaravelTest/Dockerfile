@@ -55,6 +55,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zlib1g-dev \
         unzip \
         git \
+        nginx \
+        gettext-base \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" gd \
     && docker-php-ext-install intl \
@@ -72,10 +74,12 @@ COPY --from=vendor --chown=www-data:www-data /app /var/www/html
 COPY --from=frontend --chown=www-data:www-data /build/public/build /var/www/html/public/build
 
 RUN mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R ug+rwX storage bootstrap/cache
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data storage bootstrap/cache database \
+    && chmod -R ug+rwX storage bootstrap/cache database
 
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/zz-app.ini
+COPY docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
 
 ENV APP_ENV=production \
     APP_DEBUG=false \
@@ -85,10 +89,9 @@ ENV APP_ENV=production \
     SESSION_DRIVER=file \
     CACHE_STORE=file \
     QUEUE_CONNECTION=database \
-    LOG_CHANNEL=stderr
+    LOG_CHANNEL=stderr \
+    PORT=10000
 
-EXPOSE 9000
-
-USER www-data
+EXPOSE 10000
 
 ENTRYPOINT ["/var/www/html/docker/entrypoint.sh"]

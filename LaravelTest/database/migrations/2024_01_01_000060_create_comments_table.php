@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->morphs('commentable');
             $table->text('body');
-            $table->boolean('approved')->default(false);
+            $table->boolean('approved')->default(true);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@
 
         <article class="mt-8 rounded-2xl bg-white/5 border border-white/10 p-8">
             <div class="prose prose-invert prose-lg prose-p:leading-relaxed prose-headings:text-slate-100 prose-strong:text-emerald-300 max-w-none whitespace-pre-line">
-                {{ $page->content }}
+                {!! $page->content !!}
             </div>
         </article>
 

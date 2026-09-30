@@ -72,49 +72,14 @@
                     <h2 class="text-xl font-semibold">Comments <span class="text-slate-500 text-sm font-normal">({{ $comments->count() }})</span></h2>
 
                     @auth
-                        <form method="POST" action="{{ route('comments.store') }}" class="mt-4 rounded-2xl bg-white/5 border border-white/10 p-6">
-                            @csrf
-                            <input type="hidden" name="commentable_type" value="{{ get_class($server) }}">
-                            <input type="hidden" name="commentable_id" value="{{ $server->id }}">
-                            <textarea name="body" rows="3" required placeholder="Write a comment…" class="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50">{{ old('body') }}</textarea>
-                            @error('body')
-                                <p class="mt-2 text-sm text-red-400">{{ $message }}</p>
-                            @enderror
-                            <div class="mt-3 flex justify-end">
-                                <button type="submit" class="rounded-lg bg-emerald-500 hover:bg-emerald-400 px-5 py-2 text-sm font-semibold text-white transition">Comment</button>
-                            </div>
-                        </form>
+                        @include('comments._form', ['commentable' => $server])
                     @else
                         <p class="mt-4 rounded-2xl bg-white/5 border border-white/10 p-6 text-sm text-slate-400">
                             <a href="{{ route('login') }}" class="text-emerald-400 hover:underline">Log in</a> to leave a comment.
                         </p>
                     @endauth
 
-                    <div class="mt-6 space-y-4">
-                        @forelse ($comments as $comment)
-                            <div class="rounded-2xl bg-white/5 border border-white/10 p-6">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 grid place-items-center text-xs font-bold text-white">{{ mb_strtoupper(mb_substr($comment->user->name, 0, 1)) }}</span>
-                                        <div>
-                                            <p class="text-sm font-medium">{{ $comment->user->name }}</p>
-                                            <p class="text-xs text-slate-500">{{ $comment->created_at->diffForHumans() }}</p>
-                                        </div>
-                                    </div>
-                                    @if (auth()->id() === $comment->user_id || (auth()->user()?->isAdmin()))
-                                        <form method="POST" action="{{ route('comments.destroy', $comment) }}" onsubmit="return confirm('Delete this comment?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-xs text-red-400 hover:text-red-300">Delete</button>
-                                        </form>
-                                    @endif
-                                </div>
-                                <p class="mt-3 text-sm leading-relaxed text-slate-300">{{ $comment->body }}</p>
-                            </div>
-                        @empty
-                            <p class="text-sm text-slate-500">No comments yet. Be the first!</p>
-                        @endforelse
-                    </div>
+                    @include('comments._list', ['comments' => $comments])
                 </div>
             </div>
 

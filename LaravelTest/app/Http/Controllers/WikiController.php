@@ -39,9 +39,18 @@ class WikiController extends Controller
     {
         abort_unless($wikiPage->approved, 404);
 
-        $wikiPage->load(['user', 'comments.user']);
+        $wikiPage->load('user');
 
-        $comments = $wikiPage->comments()->with('user')->latest()->get();
+        // Only published comments are shown to the public. Admins see the
+        // hidden ones too, otherwise there would be no way to review what the
+        // moderation bot decided. The `comments.user` relation is not eager
+        // loaded separately: the query below already hydrates it, and loading
+        // it twice cost an extra round trip per page view.
+        $comments = $wikiPage->comments()
+            ->when(! auth()->user()?->isAdmin(), fn ($query) => $query->published())
+            ->with('user')
+            ->latest()
+            ->get();
         $related = WikiPage::where('id', '!=', $wikiPage->id)
             ->where('approved', true)
             ->where('category', $wikiPage->category)

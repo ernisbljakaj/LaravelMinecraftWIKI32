@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Comments\Tables;
 
+use App\Moderation\ModerationStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -33,6 +34,22 @@ class CommentsTable
                     ->searchable(),
                 BooleanColumn::make('approved')
                     ->label('Approved'),
+                TextColumn::make('moderation_status')
+                    ->label('Bot verdict')
+                    ->badge()
+                    ->formatStateUsing(fn (?ModerationStatus $state) => $state?->label() ?? 'Unknown')
+                    ->color(fn (?ModerationStatus $state) => $state?->color() ?? 'gray')
+                    ->sortable(),
+                TextColumn::make('moderation_source')
+                    ->label('Checked by')
+                    ->badge()
+                    ->color('gray')
+                    ->placeholder('—'),
+                TextColumn::make('moderation_reason')
+                    ->label('Reason')
+                    ->limit(60)
+                    ->placeholder('—')
+                    ->tooltip(fn (?string $state) => $state),
                 TextColumn::make('created_at')
                     ->label('Created')
                     ->date('d.m.Y H:i')
@@ -41,6 +58,13 @@ class CommentsTable
             ->filters([
                 TernaryFilter::make('approved')
                     ->label('Approval'),
+                SelectFilter::make('moderation_status')
+                    ->label('Bot verdict')
+                    ->options([
+                        ModerationStatus::Pending->value => ModerationStatus::Pending->label(),
+                        ModerationStatus::Approved->value => ModerationStatus::Approved->label(),
+                        ModerationStatus::Rejected->value => ModerationStatus::Rejected->label(),
+                    ]),
                 SelectFilter::make('commentable_type')
                     ->label('Section')
                     ->options([

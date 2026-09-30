@@ -31,4 +31,9 @@ class WikiPageFactory extends Factory
     {
         return $this->state(fn () => ['approved' => true]);
     }
+
+    public function unapproved(): static
+    {
+        return $this->state(fn () => ['approved' => false]);
+    }
 }

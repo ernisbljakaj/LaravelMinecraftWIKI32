@@ -14,7 +14,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/server/{server}/favorite', [FavoriteController::class, 'toggle'])->name('servers.favorite');
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 
-    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/comments', [CommentController::class, 'store'])
+        ->middleware('throttle:comments')
+        ->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 

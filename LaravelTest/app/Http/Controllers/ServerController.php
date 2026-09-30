@@ -89,9 +89,18 @@ class ServerController extends Controller
     {
         abort_unless($server->approved, 404);
 
-        $server->load(['tags', 'user', 'comments.user']);
+        $server->load(['tags', 'user']);
 
-        $comments = $server->comments()->with('user')->latest()->get();
+        // Only published comments are shown to the public. Admins see the
+        // hidden ones too, otherwise there would be no way to review what the
+        // moderation bot decided. The `comments.user` relation is not eager
+        // loaded separately: the query below already hydrates it, and loading
+        // it twice cost an extra round trip per page view.
+        $comments = $server->comments()
+            ->when(! auth()->user()?->isAdmin(), fn ($query) => $query->published())
+            ->with('user')
+            ->latest()
+            ->get();
         $related = Server::where('id', '!=', $server->id)
             ->where('approved', true)
             ->whereHas('tags', fn ($q) => $q->whereIn('tags.id', $server->tags->pluck('id')))
